@@ -2,8 +2,8 @@
 
 A single-page online store built for the 10X Front-end graduation project. Browse a catalog, open product pages, fill a cart, log in (or sign up) and place a simulated order. The look is elegant and calm: a cream/ivory light theme and a true-black dark theme (product photos always sit on a light tile, so they stay easy to see), a serif display font (Playfair Display), the red star of the logo shading into burgundy, champagne gold and deep navy accents.
 
-**Live demo:** `<add your Vercel / Netlify link here>`
-**Test account:** username `emilys`, password `emilyspass` (any username works with a password of 6+ characters; there is no real authentication).
+**Live demo:** (https://10x-shop-ana-kurtiashvili.vercel.app)
+**Test account:** username `demo@test.com`, password `demo1234` (any username works with a password of 6+ characters; there is no real authentication).
 
 ## Features
 
