@@ -1,0 +1,1 @@
+import{y as o}from"./index-DEqrtpQ7.js";function i(r){return o(r)&&typeof r.from=="string"&&r.from.startsWith("/")&&!r.from.startsWith("//")?r.from:null}function f(r){return o(r)&&typeof r.notice=="string"?r.notice:null}export{i as a,f as g};

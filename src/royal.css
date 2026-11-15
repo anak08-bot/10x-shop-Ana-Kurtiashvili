@@ -1,0 +1,343 @@
+/* ==========================================================================
+   Royal / Renaissance styling.
+   Plain CSS on purpose (no Tailwind syntax) so it can be tested on its own.
+   Uses the theme variables defined in index.css (--card, --ink, --tile ...).
+   ========================================================================== */
+
+:root {
+  --gold-hi: #f9ecb4;
+  --gold-mid: #d4af5f;
+  --gold-lo: #8a6320;
+  --gold-deep: #4d3309;
+  --velvet: #6b0a19;
+}
+
+/* ---------- Gilded picture frame ---------- */
+.gilt-frame {
+  position: relative;
+  padding: 13px;
+  border-radius: 3px;
+  background:
+    linear-gradient(135deg, #fbefb9 0%, #d9b45e 14%, #8a6320 32%, #f0d98f 50%, #a47a2b 68%, #e9cf85 84%, #8a6320 100%);
+  box-shadow:
+    0 0 0 1px var(--gold-deep),
+    0 14px 30px -12px rgba(0, 0, 0, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -2px 3px rgba(60, 35, 5, 0.55);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+/* carved bead moulding running around the frame */
+.gilt-frame::before {
+  content: "";
+  position: absolute;
+  inset: 3px;
+  border: 4px dotted rgba(77, 51, 9, 0.5);
+  border-radius: 2px;
+  pointer-events: none;
+}
+/* inner bevel where the frame meets the canvas */
+.gilt-frame::after {
+  content: "";
+  position: absolute;
+  inset: 10px;
+  border-radius: 1px;
+  box-shadow:
+    0 0 0 2px #f6e3a0,
+    0 0 0 3px var(--gold-deep),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.35);
+  pointer-events: none;
+}
+.gilt-frame:hover,
+.gilt-frame:focus-within {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px var(--gold-deep),
+    0 22px 38px -12px rgba(0, 0, 0, 0.6),
+    0 0 28px -4px rgba(212, 175, 95, 0.55),
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -2px 3px rgba(60, 35, 5, 0.55);
+}
+.gilt-frame__canvas {
+  position: relative;
+  overflow: hidden;
+  background: var(--card);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+}
+.gilt-frame--flat:hover {
+  transform: none;
+}
+
+/* leafy corner ornaments */
+.gilt-corner {
+  position: absolute;
+  z-index: 2;
+  width: 34px;
+  height: 34px;
+  pointer-events: none;
+  filter: drop-shadow(0 1px 1px rgba(40, 22, 2, 0.6));
+}
+.gilt-corner--tl { top: -2px; left: -2px; }
+.gilt-corner--tr { top: -2px; right: -2px; transform: scaleX(-1); }
+.gilt-corner--bl { bottom: -2px; left: -2px; transform: scaleY(-1); }
+.gilt-corner--br { bottom: -2px; right: -2px; transform: scale(-1, -1); }
+
+/* the painting itself: warm glaze + vignette, like old varnish */
+.painting {
+  position: relative;
+  background:
+    radial-gradient(ellipse at 50% 38%, rgba(255, 244, 214, 0.9), rgba(236, 222, 190, 0.95) 62%, rgba(196, 170, 120, 0.95) 100%);
+}
+.painting::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: inset 0 0 38px rgba(70, 40, 5, 0.38);
+  background: linear-gradient(160deg, rgba(255, 255, 255, 0.18), transparent 35%, rgba(60, 30, 0, 0.1));
+}
+
+/* brass museum plaque under a painting */
+.placard {
+  position: relative;
+  padding: 0.85rem 0.9rem 0.95rem;
+  background: linear-gradient(180deg, var(--card), var(--sunken));
+  border-top: 1px solid rgba(138, 99, 32, 0.55);
+}
+.placard::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -5px;
+  width: 9px;
+  height: 9px;
+  transform: translateX(-50%) rotate(45deg);
+  background: linear-gradient(135deg, #f9ecb4, #8a6320);
+  box-shadow: 0 0 0 1px var(--gold-deep);
+}
+.placard-title {
+  font-family: "Cormorant Garamond", "Noto Serif Georgian", Georgia, serif;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.15;
+  text-align: center;
+}
+
+/* ---------- Ornate panel for ordinary cards ---------- */
+.royal-panel {
+  border: 1px solid rgba(193, 154, 73, 0.55);
+  border-radius: 3px;
+  background-color: var(--card);
+  box-shadow:
+    inset 0 0 0 5px var(--card),
+    inset 0 0 0 6px rgba(193, 154, 73, 0.4),
+    0 10px 24px -14px rgba(0, 0, 0, 0.45);
+}
+
+/* ---------- Ornaments ---------- */
+.royal-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.9rem;
+  color: var(--gold-mid);
+}
+.royal-divider::before,
+.royal-divider::after {
+  content: "";
+  height: 1px;
+  flex: 1;
+  max-width: 11rem;
+  background: linear-gradient(90deg, transparent, var(--gold-mid));
+}
+.royal-divider::after {
+  background: linear-gradient(270deg, transparent, var(--gold-mid));
+}
+
+.gold-text {
+  background: linear-gradient(180deg, #fbefb9 0%, #d4af5f 45%, #a07c2f 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.royal-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.2rem 0.7rem 0.2rem 0.5rem;
+  border-radius: 999px;
+  border: 1px solid var(--gold-mid);
+  background: linear-gradient(180deg, #7d0f22, #4f0712);
+  color: var(--gold-hi);
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.25), 0 0 12px -2px rgba(212, 175, 95, 0.5);
+}
+
+/* ---------- Palace hall hero ---------- */
+.hall-glow {
+  animation: hall-flicker 5s ease-in-out infinite;
+}
+@keyframes hall-flicker {
+  0%, 100% { opacity: 0.95; }
+  45% { opacity: 0.75; }
+  60% { opacity: 1; }
+}
+
+/* ==========================================================================
+   Coronation: shown after a purchase
+   ========================================================================== */
+.coronation {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  overflow: hidden;
+  text-align: center;
+  color: #fff8e1;
+  background: radial-gradient(ellipse at 50% 35%, rgba(130, 18, 40, 0.985), rgba(22, 6, 10, 0.995) 72%);
+  animation: cor-fade 0.45s ease both;
+}
+.coronation--out {
+  animation: cor-fade-out 0.45s ease both;
+}
+.coronation__rays {
+  position: absolute;
+  left: 50%;
+  top: 34%;
+  width: 170vmax;
+  height: 170vmax;
+  margin: -85vmax 0 0 -85vmax;
+  background: repeating-conic-gradient(from 0deg, rgba(249, 236, 180, 0.2) 0 5deg, transparent 5deg 15deg);
+  -webkit-mask-image: radial-gradient(circle, #000 0, transparent 42%);
+  mask-image: radial-gradient(circle, #000 0, transparent 42%);
+  animation: cor-fade 1.4s 0.7s ease both, cor-spin 50s linear infinite;
+  pointer-events: none;
+}
+.coronation__stage {
+  position: relative;
+  display: grid;
+  place-items: center;
+  width: min(62vw, 290px);
+  aspect-ratio: 1 / 0.9;
+}
+.coronation__ring {
+  position: absolute;
+  left: 50%;
+  bottom: 6%;
+  width: 60%;
+  height: 22%;
+  margin-left: -30%;
+  border: 3px solid rgba(249, 236, 180, 0.85);
+  border-radius: 50%;
+  opacity: 0;
+  animation: cor-ring 1.3s 0.72s ease-out both;
+}
+.coronation__ring--2 {
+  animation-delay: 0.95s;
+}
+.coronation__crown {
+  width: 100%;
+  height: auto;
+  filter: drop-shadow(0 20px 26px rgba(0, 0, 0, 0.6)) drop-shadow(0 0 34px rgba(250, 205, 90, 0.6));
+  transform-origin: 50% 90%;
+  animation: cor-jump 2s cubic-bezier(0.3, 0.7, 0.4, 1) both, cor-float 3.2s 2s ease-in-out infinite;
+}
+.coronation__eyebrow {
+  font-family: "Cinzel", Georgia, serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--gold-mid);
+  margin-top: 1.2rem;
+  animation: cor-rise 0.8s 1.5s ease both;
+}
+.coronation__title {
+  font-family: "Cinzel", "Noto Serif Georgian", Georgia, serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 7vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: 0.02em;
+  animation: cor-rise 0.9s 1.65s ease both;
+}
+.coronation__sub {
+  max-width: 30rem;
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(1.1rem, 3.4vw, 1.45rem);
+  font-style: italic;
+  color: rgba(255, 248, 225, 0.85);
+  animation: cor-rise 0.9s 1.85s ease both;
+}
+.coronation__action {
+  margin-top: 1.2rem;
+  animation: cor-rise 0.9s 2.1s ease both;
+}
+.coronation__bit {
+  position: absolute;
+  top: -6vh;
+  left: var(--l);
+  width: var(--s);
+  height: calc(var(--s) * 1.7);
+  border-radius: 2px;
+  background: linear-gradient(135deg, #fbefb9, #d4af5f 50%, #8a6320);
+  box-shadow: 0 0 6px rgba(250, 205, 90, 0.7);
+  opacity: 0;
+  animation: cor-fall var(--t) var(--d) linear infinite;
+  pointer-events: none;
+}
+.coronation__bit--ruby {
+  background: linear-gradient(135deg, #ff7b8f, #c4122f 55%, #6b0a19);
+  box-shadow: 0 0 6px rgba(196, 18, 47, 0.8);
+}
+
+@keyframes cor-fade { from { opacity: 0; } to { opacity: 1; } }
+@keyframes cor-fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes cor-spin { to { transform: rotate(360deg); } }
+@keyframes cor-float {
+  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
+  50% { transform: translateY(-10px) rotate(1.5deg); }
+}
+@keyframes cor-rise {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: none; }
+}
+@keyframes cor-ring {
+  0% { opacity: 0.9; transform: scale(0.3); }
+  100% { opacity: 0; transform: scale(3.4); }
+}
+/* the crown leaps in from above, slams down, then hops twice before settling */
+@keyframes cor-jump {
+  0%   { opacity: 0; transform: translateY(-115vh) rotate(-30deg) scale(0.45); }
+  12%  { opacity: 1; }
+  38%  { transform: translateY(0) rotate(7deg) scale(1.22, 0.8); }
+  50%  { transform: translateY(-95px) rotate(-4deg) scale(0.95, 1.1); }
+  62%  { transform: translateY(0) rotate(2deg) scale(1.12, 0.9); }
+  74%  { transform: translateY(-38px) rotate(-1deg) scale(1, 1.04); }
+  86%  { transform: translateY(0) scale(1.05, 0.96); }
+  100% { opacity: 1; transform: none; }
+}
+@keyframes cor-fall {
+  0%   { opacity: 0; transform: translateY(0) rotate(0deg) translateX(0); }
+  8%   { opacity: 1; }
+  100% { opacity: 1; transform: translateY(112vh) rotate(var(--r)) translateX(var(--sway)); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .coronation__crown,
+  .coronation__rays,
+  .hall-glow {
+    animation: none;
+  }
+  .coronation__bit {
+    display: none;
+  }
+}
